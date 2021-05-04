@@ -1,0 +1,25 @@
+<%- include('../../partials/header') %>
+    <%- include('../../partials/navbar') %>
+
+        <div class="main container d-flex justify-content-center">
+            <div class="col-12 col-md-8 my-4">
+                <div class="card border-0 shadow">
+                    <div class="card-header bg-primary text-white">
+                        Editando categoria
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/categories/update" method="POST">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Categoria</label>
+                                <input type="hidden" name="id" value="<%= category.id %> ">
+                                <input type="text" class="form-control" id="title" name="title" value="<%= category.title %>" aria-describedby="titleHelp">
+                                <div id="titleHelp" class="form-text">Ao realizar a alteração, a mesma será refletida em todo o sistema.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('../../partials/footer') %>
