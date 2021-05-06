@@ -6,6 +6,6 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 
 const category__confirm__destroy = (e, form) => {
   e.preventDefault();
-  let confirmation = confirm("tem certeza que deseja excluir a categoria?");
+  let confirmation = confirm("tem certeza que deseja excluir este item?");
   if(confirmation) form.submit();
 }

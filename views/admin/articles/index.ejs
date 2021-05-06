@@ -1,0 +1,46 @@
+<%- include('../../partials/header') %>
+    <%- include('../../partials/navbar') %>
+
+        <div class="container pt-4">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <h2 class="d-flex align-items-center">Todos artigos
+                        <a href="/admin/articles/new" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Novo artigo" class="text-success fs-5 mt-2 mx-2">
+                            <i class='bx bx-plus'></i>
+                        </a>
+                    </h2>
+                </div>
+            </div>
+
+
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+
+                <% articles.forEach(article=> { %>
+                    <div class="col">
+                        <div class="card border-0 shadow">
+                            <img 
+                            src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-3">
+                                    <%= article.category.title %>
+                                </span>
+                                <form method="POST" action="/admin/articles/destroy" class="float-end"
+                                    onsubmit="category__confirm__destroy(event, this)">
+                                    <input type="hidden" name="id" value="<%= article.id %>">
+                                    <button type="submit" class="btn text-danger"><i class="bx bx-trash"></i></button>
+                                </form>
+                                <h5 class="card-title">
+                                    <%= article.title %>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+
+            </div>
+
+        </div>
+
+        <%- include('../../partials/footer') %>
