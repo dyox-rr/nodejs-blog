@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const CategoryController = require('../controllers/CategoryController');
 const ArticleController = require('../controllers/ArticleController');
+const HomeController = require('../controllers/HomeController');
+
+
+
+router.get('/', HomeController.index);
+router.get('/:slug', HomeController.show_article);
 
 
 router.get('/admin/categories', CategoryController.index);

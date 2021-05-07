@@ -1,0 +1,19 @@
+<%- include('./partials/header_public') %>
+
+    <div class="row m-0">
+
+        <!-- SIDEBAR -->
+        <div class="col-12 col-md-2 p-0 h-100" id="sidebar">
+            <%- include('./partials/navbar_public') %>
+        </div>
+        <!-- END SIDEBAR -->
+
+        <div class="col-12 col-md-10 h-100 p-3 scroll-show" id="content">
+            <div class="container">
+                <%- article.body %>
+            </div>  
+        </div>
+
+    </div>
+
+    <%- include('./partials/footer_public') %>
