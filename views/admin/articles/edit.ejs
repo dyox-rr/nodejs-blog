@@ -1,0 +1,55 @@
+<%- include('../../partials/header') %>
+    <%- include('../../partials/navbar') %>
+
+        <div class="main container d-flex justify-content-center">
+            <div class="col-12 my-4">
+
+
+
+                <form action="/admin/articles/update" method="POST">
+                    <input type="hidden" name="id" value="<%= article.id %> ">
+                    <div class="mb-3">
+                        <div id="titleHelp" class="form-text">O título será utilizado para compor o link para o
+                            artigo.</div>
+                        <input type="text" class="form-control article-title" id="title" name="title"
+                            aria-describedby="titleHelp" value="<%= article.title %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category">Categoria</label>
+                        <select name="category" id="category" class="form-control">
+                            <% categories.forEach(category=> { %>
+                                <option value="<%= category.id %>" <% if (category.id==article.category.id) { %>
+                                    selected
+                                    <% } %>>
+                                        <%= category.title %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <textarea name="body" id="body" class="form-control"><%- article.body %> </textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">REPUBLICAR</button>
+                </form>
+
+
+            </div>
+        </div>
+
+        <!-- scripts -->
+        <script src="/js/tinymce/tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                language: 'pt_BR',
+                selector: "#body",
+                plugins: [
+                    'advlist autolink link image lists preview hr searchreplace wordcount fullscreen insertdatetime media save table paste'
+                ],
+                height: 500
+            })
+        </script>
+        <%- include('../../partials/footer') %>

@@ -63,3 +63,40 @@ exports.destroy = (req, res) => {
         })
     }
 };
+
+exports.edit = (req, res) => {
+    let { id } = req.params;
+    Article.findOne({
+        include: [
+            {model:Category}
+        ]
+    }).then(article => {
+        Category.findAll().then(categories => {
+            res.render('admin/articles/edit', {
+                article,
+                categories
+            });
+        }).catch(e => {
+            console.error(e);
+            res.redirect('/admin/articles');
+        });
+    }).catch(e => {
+        console.error(e);
+        res.redirect('/admin/articles');
+    });
+}
+
+exports.update = (req, res) => {
+    let { id, title, category, body } = req.body;
+    Article.update({
+        title, categoryId: category, body
+    }, {
+        where: { id }
+    }).then(() => {
+        console.log('articles was updated.');
+        res.redirect(`/admin/articles/edit/${id}`);
+    }).catch(e => {
+        console.error(e);
+        res.redirect(`/admin/articles/edit/${id}`);
+    })
+}

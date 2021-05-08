@@ -1,6 +1,7 @@
 
 const Category = require('../models/Category');
 const slugify = require('slugify');
+const Article=require('../models/Article');
 
 
 exports.index = (req, res) => {
@@ -96,4 +97,26 @@ exports.update = (req, res) => {
     }else{
         res.redirect('/admin/categories');
     }
+}
+
+
+exports.all = (req, res) => {
+    Category.findAll().then(categories => {
+        Article.findAll({
+            include: [
+                {model: Category}
+            ]
+        }).then(articles => {
+            res.render('categories', {
+                categories,
+                articles
+            });
+        }).catch(e => {
+            console.error(e);
+            res.redirect('/');
+        }); 
+    }).catch(e => {
+        console.error(e);
+        res.redirect('/');
+    });
 }

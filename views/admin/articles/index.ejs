@@ -31,6 +31,9 @@
                                     <input type="hidden" name="id" value="<%= article.id %>">
                                     <button type="submit" class="btn text-danger"><i class="bx bx-trash"></i></button>
                                 </form>
+                                <a href="/admin/articles/edit/<%= article.id %> " class="btn text-warning float-end">
+                                    <i class="bx bx-pencil"></i>
+                                </a>
                                 <h5 class="card-title">
                                     <%= article.title %>
                                 </h5>

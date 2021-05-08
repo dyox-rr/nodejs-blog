@@ -1,0 +1,77 @@
+<%- include('./partials/header_public') %>
+
+    <div class="row m-0">
+
+        <!-- SIDEBAR -->
+        <div class="col-12 col-md-2 p-0 h-100" id="sidebar">
+            <%- include('./partials/navbar_public') %>
+        </div>
+        <!-- END SIDEBAR -->
+
+        <div class="col-12 col-md-10 h-100 p-3 scroll-show" id="content">
+            <div class="container">
+                <h2>Todas as categorias</h2>
+
+                <div class="row">
+                    <div class="col-12">
+                        <span onclick="activeAllPosts()"   role="button" class="badge bg-primary p-2 fs-6">
+                            Todas
+                        </span>
+                        <% categories.forEach(category=> { %>
+                            <span onclick="filterPosts('<%= category.title %>')"   role="button" class="badge bg-primary p-2 fs-6">
+                                <%= category.title %>
+                            </span>
+                            <% }) %>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4 py-3">
+
+                    <% articles.forEach(article=> { %>
+                        <div class="col post" data-category="<%= article.category.title %>">
+                            <div class="card border-0 shadow">
+
+                                <img src="https://www.hostinger.com.br/tutoriais/wp-content/uploads/sites/12/2018/09/Como-Criar-um-Blog-%E2%80%93-Guia-Completo-1280x720.png"
+                                    class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <span class="badge bg-success"><%= article.category.title %> </span>
+
+                                    <a href="/<%= article.slug %>" class="fs-4 float-end text-dark"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Ler publicação">
+                                        <i class='bx bx-glasses-alt'></i>
+                                    </a>
+
+                                    <h5 class="card-title">
+                                        <%= article.title %>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const filterPosts = (type) => {
+            activeAllPosts();
+            const allPosts = document.getElementsByClassName('post');
+            for (let post of allPosts) {
+                let category = post.dataset.category;
+                if(post.dataset.category != type) {
+                    post.style.display = "none";
+                }
+            }
+        }
+        const activeAllPosts = () => {
+            const allPosts = document.getElementsByClassName('post');
+            for (let post of allPosts) {
+              post.style.display = 'flex';
+            }
+        }
+    </script>
+    <%- include('./partials/footer_public') %>
